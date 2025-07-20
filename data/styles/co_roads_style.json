@@ -26,33 +26,33 @@
       "maxzoom": 18,
       "type": "line",
       "paint": {
-        "line-color": "#34495E",
+        "line-color": "#1A1D20",
         "line-width": [
           "interpolate",
           ["linear"],
           ["zoom"],
           6, [
             "case",
-            ["==", ["get", "highway"], "motorway"], 3,
-            ["==", ["get", "highway"], "trunk"], 2.5,
-            ["==", ["get", "highway"], "primary"], 2,
-            ["==", ["get", "highway"], "secondary"], 1.5,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 5,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 4,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 3,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 2,
             1
           ],
           12, [
             "case",
-            ["==", ["get", "highway"], "motorway"], 8,
-            ["==", ["get", "highway"], "trunk"], 6,
-            ["==", ["get", "highway"], "primary"], 5,
-            ["==", ["get", "highway"], "secondary"], 4,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 12,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 9,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 7,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 5,
             2
           ],
           16, [
             "case",
-            ["==", ["get", "highway"], "motorway"], 12,
-            ["==", ["get", "highway"], "trunk"], 10,
-            ["==", ["get", "highway"], "primary"], 8,
-            ["==", ["get", "highway"], "secondary"], 6,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 18,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 15,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 12,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 9,
             4
           ]
         ],
@@ -69,14 +69,20 @@
       "paint": {
         "line-color": [
           "case",
-          ["==", ["get", "highway"], "motorway"], "#F8F9FA",
-          ["==", ["get", "highway"], "trunk"], "#E9ECEF", 
-          ["==", ["get", "highway"], "primary"], "#DEE2E6",
-          ["==", ["get", "highway"], "secondary"], "#CED4DA",
-          ["==", ["get", "highway"], "tertiary"], "#ADB5BD",
-          ["==", ["get", "highway"], "residential"], "#868E96",
-          ["==", ["get", "highway"], "service"], "#6C757D",
-          "#495057"
+          ["==", ["get", "highway"], "motorway"], "#212529",
+          ["==", ["get", "highway"], "motorway_link"], "#212529",
+          ["==", ["get", "highway"], "trunk"], "#343A40",
+          ["==", ["get", "highway"], "trunk_link"], "#343A40", 
+          ["==", ["get", "highway"], "primary"], "#495057",
+          ["==", ["get", "highway"], "primary_link"], "#495057",
+          ["==", ["get", "highway"], "secondary"], "#6C757D",
+          ["==", ["get", "highway"], "secondary_link"], "#6C757D",
+          ["==", ["get", "highway"], "tertiary"], "#868E96",
+          ["==", ["get", "highway"], "tertiary_link"], "#868E96",
+          ["==", ["get", "highway"], "residential"], "#ADB5BD",
+          ["==", ["get", "highway"], "unclassified"], "#ADB5BD",
+          ["==", ["get", "highway"], "service"], "#CED4DA",
+          "#DEE2E6"
         ],
         "line-width": [
           "interpolate",
@@ -84,26 +90,26 @@
           ["zoom"],
           6, [
             "case",
-            ["==", ["get", "highway"], "motorway"], 2,
-            ["==", ["get", "highway"], "trunk"], 1.5,
-            ["==", ["get", "highway"], "primary"], 1.2,
-            ["==", ["get", "highway"], "secondary"], 1,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 4,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 3,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 2.5,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 1.5,
             0.5
           ],
           12, [
             "case",
-            ["==", ["get", "highway"], "motorway"], 6,
-            ["==", ["get", "highway"], "trunk"], 4,
-            ["==", ["get", "highway"], "primary"], 3.5,
-            ["==", ["get", "highway"], "secondary"], 3,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 10,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 7,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 5.5,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 4,
             1.5
           ],
           16, [
             "case",
-            ["==", ["get", "highway"], "motorway"], 10,
-            ["==", ["get", "highway"], "trunk"], 8,
-            ["==", ["get", "highway"], "primary"], 6,
-            ["==", ["get", "highway"], "secondary"], 4,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 15,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 12,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 9,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 7,
             3
           ]
         ],
