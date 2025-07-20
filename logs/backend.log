@@ -47,3 +47,13 @@ INFO:     127.0.0.1:52246 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
 INFO:     127.0.0.1:52375 - "GET /api/styles/co_roads?template=roads_by_type HTTP/1.1" 200 OK
 INFO:     127.0.0.1:52375 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
 INFO:     127.0.0.1:52905 - "GET /api/styles/co_power_lines?template=power_by_voltage HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55702 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58544 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58555 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK

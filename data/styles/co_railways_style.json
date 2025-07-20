@@ -36,9 +36,9 @@
         ],
         "line-dasharray": [
           "case",
-          ["==", ["get", "usage"], "main"], [8, 4],
-          ["==", ["get", "usage"], "branch"], [6, 3],
-          [4, 2]
+          ["==", ["get", "usage"], "main"], ["literal", [8, 4]],
+          ["==", ["get", "usage"], "branch"], ["literal", [6, 3]],
+          ["literal", [4, 2]]
         ],
         "line-width": [
           "interpolate",

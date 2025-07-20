@@ -117,23 +117,23 @@ class LayerControls {
                 <div class="legend-title">Power Lines by Voltage</div>
                 <div class="legend-items">
                     <div class="legend-item">
-                        <div class="legend-symbol power-345"></div>
+                        <div class="legend-symbol" style="background-color: #FFD700; height: 4px;"></div>
                         <span>345kV+ (Extra High Voltage)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-symbol power-230"></div>
+                        <div class="legend-symbol" style="background-color: #FFD700; height: 3px;"></div>
                         <span>230kV+ (High Voltage)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-symbol power-138"></div>
+                        <div class="legend-symbol" style="background-color: #FFD700; height: 2px;"></div>
                         <span>138kV+ (Sub-transmission)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-symbol power-69"></div>
+                        <div class="legend-symbol" style="background-color: #FFD700; height: 2px;"></div>
                         <span>69kV+ (Distribution)</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-symbol power-low"></div>
+                        <div class="legend-symbol" style="background-color: #FFD700; height: 1px;"></div>
                         <span>&lt;69kV (Local Distribution)</span>
                     </div>
                 </div>

@@ -315,32 +315,32 @@
 }
 
 .legend-symbol.road-motorway {
-    background-color: #E74C3C;
+    background-color: #F8F9FA;
     height: 4px;
 }
 
 .legend-symbol.road-trunk {
-    background-color: #E67E22;
+    background-color: #E9ECEF;
     height: 3px;
 }
 
 .legend-symbol.road-primary {
-    background-color: #F39C12;
+    background-color: #DEE2E6;
     height: 3px;
 }
 
 .legend-symbol.road-secondary {
-    background-color: #F1C40F;
+    background-color: #CED4DA;
     height: 2px;
 }
 
 .legend-symbol.road-tertiary {
-    background-color: #52C41A;
+    background-color: #ADB5BD;
     height: 2px;
 }
 
 .legend-symbol.road-residential {
-    background-color: #BDC3C7;
+    background-color: #868E96;
     height: 1px;
 }
 

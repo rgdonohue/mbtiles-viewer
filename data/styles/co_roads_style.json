@@ -69,14 +69,14 @@
       "paint": {
         "line-color": [
           "case",
-          ["==", ["get", "highway"], "motorway"], "#E74C3C",
-          ["==", ["get", "highway"], "trunk"], "#E67E22",
-          ["==", ["get", "highway"], "primary"], "#F39C12",
-          ["==", ["get", "highway"], "secondary"], "#F1C40F",
-          ["==", ["get", "highway"], "tertiary"], "#52C41A",
-          ["==", ["get", "highway"], "residential"], "#BDC3C7",
-          ["==", ["get", "highway"], "service"], "#95A5A6",
-          "#7F8C8D"
+          ["==", ["get", "highway"], "motorway"], "#F8F9FA",
+          ["==", ["get", "highway"], "trunk"], "#E9ECEF", 
+          ["==", ["get", "highway"], "primary"], "#DEE2E6",
+          ["==", ["get", "highway"], "secondary"], "#CED4DA",
+          ["==", ["get", "highway"], "tertiary"], "#ADB5BD",
+          ["==", ["get", "highway"], "residential"], "#868E96",
+          ["==", ["get", "highway"], "service"], "#6C757D",
+          "#495057"
         ],
         "line-width": [
           "interpolate",

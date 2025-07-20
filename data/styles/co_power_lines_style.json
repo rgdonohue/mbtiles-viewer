@@ -26,19 +26,7 @@
       "maxzoom": 18,
       "type": "line",
       "paint": {
-        "line-color": [
-          "case",
-          ["has", "voltage"],
-          [
-            "case",
-            [">=", ["get", "voltage"], 345000], "#FFE135",
-            [">=", ["get", "voltage"], 230000], "#FFD700", 
-            [">=", ["get", "voltage"], 138000], "#FFC107",
-            [">=", ["get", "voltage"], 69000], "#FFB300",
-            "#FFA726"
-          ],
-          "#FFD54F"
-        ],
+        "line-color": "#FFD700",
         "line-width": [
           "interpolate",
           ["linear"],
