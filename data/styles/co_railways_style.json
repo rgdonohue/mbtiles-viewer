@@ -34,12 +34,7 @@
           ["==", ["get", "service"], "yard"], "#424242",
           "#6E6E6E"
         ],
-        "line-dasharray": [
-          "case",
-          ["==", ["get", "usage"], "main"], ["literal", [8, 4]],
-          ["==", ["get", "usage"], "branch"], ["literal", [6, 3]],
-          ["literal", [4, 2]]
-        ],
+        "line-dasharray": [6, 3],
         "line-width": [
           "interpolate",
           ["linear"],
