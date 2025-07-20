@@ -80,3 +80,21 @@
 ::1 - - [20/Jul/2025 17:10:56] "GET /js/tile-source.js HTTP/1.1" 200 -
 ::1 - - [20/Jul/2025 17:10:56] code 404, message File not found
 ::1 - - [20/Jul/2025 17:10:56] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [20/Jul/2025 17:17:09] "GET / HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] "GET /css/style.css HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] "GET /js/app.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] "GET /css/components.css HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] "GET /js/layer-controls.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] "GET /js/feature-popup.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] "GET /js/tile-source.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:17:10] code 404, message File not found
+::1 - - [20/Jul/2025 17:17:10] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [20/Jul/2025 17:18:38] "GET / HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:18:38] code 404, message File not found
+::1 - - [20/Jul/2025 17:18:38] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [20/Jul/2025 17:18:38] "GET /css/style.css HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:18:38] "GET /css/components.css HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:18:38] "GET /js/app.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:18:38] "GET /js/layer-controls.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:18:38] "GET /js/feature-popup.js HTTP/1.1" 200 -
+::1 - - [20/Jul/2025 17:18:38] "GET /js/tile-source.js HTTP/1.1" 200 -

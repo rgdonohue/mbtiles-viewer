@@ -83,3 +83,11 @@ INFO:     127.0.0.1:62996 - "GET /api/styles/co_railways?template=railways_by_us
 INFO:     127.0.0.1:63153 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
 INFO:     127.0.0.1:63222 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
 INFO:     127.0.0.1:63358 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63524 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63524 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63524 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63524 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63964 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63964 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63964 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63964 - "GET /api/styles/co_roads HTTP/1.1" 200 OK

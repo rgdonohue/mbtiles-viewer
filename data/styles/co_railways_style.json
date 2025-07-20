@@ -22,7 +22,7 @@
       "id": "railways",
       "source": "tilecraft",
       "source-layer": "railways",
-      "minzoom": 8,
+      "minzoom": 0,
       "maxzoom": 18,
       "type": "line",
       "paint": {

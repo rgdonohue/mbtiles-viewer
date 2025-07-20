@@ -22,7 +22,7 @@
       "id": "power_lines",
       "source": "tilecraft",
       "source-layer": "power_lines",
-      "minzoom": 6,
+      "minzoom": 0,
       "maxzoom": 18,
       "type": "line",
       "paint": {
