@@ -1,0 +1,70 @@
+{
+  "version": 8,
+  "name": "Colorado Railways",
+  "metadata": {
+    "description": "Railway lines and infrastructure in Colorado"
+  },
+  "sources": {
+    "tilecraft": {
+      "type": "vector",
+      "url": "mbtiles://co_railways.mbtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#2C3E50"
+      }
+    },
+    {
+      "id": "railways",
+      "source": "tilecraft",
+      "source-layer": "railways",
+      "minzoom": 8,
+      "maxzoom": 18,
+      "type": "line",
+      "paint": {
+        "line-color": [
+          "case",
+          ["==", ["get", "usage"], "main"], "#9E9E9E",
+          ["==", ["get", "usage"], "branch"], "#757575",
+          ["==", ["get", "service"], "siding"], "#616161",
+          ["==", ["get", "service"], "yard"], "#424242",
+          "#6E6E6E"
+        ],
+        "line-dasharray": [
+          "case",
+          ["==", ["get", "usage"], "main"], [8, 4],
+          ["==", ["get", "usage"], "branch"], [6, 3],
+          [4, 2]
+        ],
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          8, [
+            "case",
+            ["==", ["get", "usage"], "main"], 2,
+            ["==", ["get", "usage"], "branch"], 1.5,
+            1
+          ],
+          12, [
+            "case",
+            ["==", ["get", "usage"], "main"], 4,
+            ["==", ["get", "usage"], "branch"], 3,
+            2
+          ],
+          16, [
+            "case",
+            ["==", ["get", "usage"], "main"], 6,
+            ["==", ["get", "usage"], "branch"], 4.5,
+            3
+          ]
+        ],
+        "line-opacity": 0.9
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "version": 8,
+  "name": "Colorado Power Lines",
+  "metadata": {
+    "description": "Power transmission and distribution lines in Colorado"
+  },
+  "sources": {
+    "tilecraft": {
+      "type": "vector",
+      "url": "mbtiles://co_power_lines.mbtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#2C3E50"
+      }
+    },
+    {
+      "id": "power_lines",
+      "source": "tilecraft",
+      "source-layer": "power_lines",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "type": "line",
+      "paint": {
+        "line-color": [
+          "case",
+          ["has", "voltage"],
+          [
+            "case",
+            [">=", ["get", "voltage"], 345000], "#FFE135",
+            [">=", ["get", "voltage"], 230000], "#FFD700", 
+            [">=", ["get", "voltage"], 138000], "#FFC107",
+            [">=", ["get", "voltage"], 69000], "#FFB300",
+            "#FFA726"
+          ],
+          "#FFD54F"
+        ],
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6, [
+            "case",
+            ["has", "voltage"],
+            [
+              "case",
+              [">=", ["get", "voltage"], 345000], 3,
+              [">=", ["get", "voltage"], 230000], 2.5,
+              [">=", ["get", "voltage"], 138000], 2,
+              1.5
+            ],
+            1.5
+          ],
+          12, [
+            "case",
+            ["has", "voltage"],
+            [
+              "case",
+              [">=", ["get", "voltage"], 345000], 6,
+              [">=", ["get", "voltage"], 230000], 5,
+              [">=", ["get", "voltage"], 138000], 4,
+              3
+            ],
+            3
+          ],
+          16, [
+            "case",
+            ["has", "voltage"],
+            [
+              "case",
+              [">=", ["get", "voltage"], 345000], 10,
+              [">=", ["get", "voltage"], 230000], 8,
+              [">=", ["get", "voltage"], 138000], 6,
+              4
+            ],
+            4
+          ]
+        ],
+        "line-opacity": 0.9
+      }
+    }
+  ]
+}

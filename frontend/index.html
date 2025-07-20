@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorado Infrastructure Tile Viewer</title>
+    
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl@^5.6.1/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@^5.6.1/dist/maplibre-gl.css" rel="stylesheet" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>Colorado Infrastructure Viewer</h1>
+            <div class="header-controls">
+                <button id="fullscreen-btn" class="btn btn-secondary">Fullscreen</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Map Container -->
+            <div id="map" class="map-container"></div>
+            
+            <!-- Layer Control Panel -->
+            <div id="layer-panel" class="layer-panel">
+                <div class="panel-header">
+                    <h3>Layers</h3>
+                    <button id="toggle-panel" class="btn btn-small">−</button>
+                </div>
+                
+                <div class="panel-content" id="layer-controls">
+                    <!-- Layer controls will be populated by JavaScript -->
+                    <div class="loading">Loading datasets...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Popup -->
+        <div id="feature-popup" class="feature-popup hidden">
+            <div class="popup-header">
+                <span class="popup-title"></span>
+                <button class="popup-close">&times;</button>
+            </div>
+            <div class="popup-content"></div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p>Loading map...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+    <script src="js/layer-controls.js"></script>
+    <script src="js/feature-popup.js"></script>
+    <script src="js/tile-source.js"></script>
+</body>
+</html>

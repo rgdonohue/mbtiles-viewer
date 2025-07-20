@@ -1,0 +1,18 @@
+{
+  "options": {
+    "serveAllFonts": false,
+    "serveStaticMaps": true
+  },
+  "styles": {},
+  "data": {
+    "co_power_lines": {
+      "mbtiles": "../data/mbtiles/co_power_lines.mbtiles"
+    },
+    "co_railways": {
+      "mbtiles": "../data/mbtiles/co_railways.mbtiles"  
+    },
+    "co_roads": {
+      "mbtiles": "../data/mbtiles/co_roads.mbtiles"
+    }
+  }
+}

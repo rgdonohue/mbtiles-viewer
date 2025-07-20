@@ -1,0 +1,114 @@
+{
+  "version": 8,
+  "name": "Colorado Roads",
+  "metadata": {
+    "description": "Road network in Colorado with highway classification"
+  },
+  "sources": {
+    "tilecraft": {
+      "type": "vector",
+      "url": "mbtiles://co_roads.mbtiles"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#2C3E50"
+      }
+    },
+    {
+      "id": "roads-casing",
+      "source": "tilecraft",
+      "source-layer": "roads",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "type": "line",
+      "paint": {
+        "line-color": "#34495E",
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6, [
+            "case",
+            ["==", ["get", "highway"], "motorway"], 3,
+            ["==", ["get", "highway"], "trunk"], 2.5,
+            ["==", ["get", "highway"], "primary"], 2,
+            ["==", ["get", "highway"], "secondary"], 1.5,
+            1
+          ],
+          12, [
+            "case",
+            ["==", ["get", "highway"], "motorway"], 8,
+            ["==", ["get", "highway"], "trunk"], 6,
+            ["==", ["get", "highway"], "primary"], 5,
+            ["==", ["get", "highway"], "secondary"], 4,
+            2
+          ],
+          16, [
+            "case",
+            ["==", ["get", "highway"], "motorway"], 12,
+            ["==", ["get", "highway"], "trunk"], 10,
+            ["==", ["get", "highway"], "primary"], 8,
+            ["==", ["get", "highway"], "secondary"], 6,
+            4
+          ]
+        ],
+        "line-opacity": 0.6
+      }
+    },
+    {
+      "id": "roads",
+      "source": "tilecraft",
+      "source-layer": "roads",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "type": "line",
+      "paint": {
+        "line-color": [
+          "case",
+          ["==", ["get", "highway"], "motorway"], "#E74C3C",
+          ["==", ["get", "highway"], "trunk"], "#E67E22",
+          ["==", ["get", "highway"], "primary"], "#F39C12",
+          ["==", ["get", "highway"], "secondary"], "#F1C40F",
+          ["==", ["get", "highway"], "tertiary"], "#52C41A",
+          ["==", ["get", "highway"], "residential"], "#BDC3C7",
+          ["==", ["get", "highway"], "service"], "#95A5A6",
+          "#7F8C8D"
+        ],
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6, [
+            "case",
+            ["==", ["get", "highway"], "motorway"], 2,
+            ["==", ["get", "highway"], "trunk"], 1.5,
+            ["==", ["get", "highway"], "primary"], 1.2,
+            ["==", ["get", "highway"], "secondary"], 1,
+            0.5
+          ],
+          12, [
+            "case",
+            ["==", ["get", "highway"], "motorway"], 6,
+            ["==", ["get", "highway"], "trunk"], 4,
+            ["==", ["get", "highway"], "primary"], 3.5,
+            ["==", ["get", "highway"], "secondary"], 3,
+            1.5
+          ],
+          16, [
+            "case",
+            ["==", ["get", "highway"], "motorway"], 10,
+            ["==", ["get", "highway"], "trunk"], 8,
+            ["==", ["get", "highway"], "primary"], 6,
+            ["==", ["get", "highway"], "secondary"], 4,
+            3
+          ]
+        ],
+        "line-opacity": 0.9
+      }
+    }
+  ]
+}

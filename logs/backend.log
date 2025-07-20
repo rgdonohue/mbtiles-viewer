@@ -1,0 +1,49 @@
+INFO:     Will watch for changes in these directories: ['/Users/richard/Documents/projects/tileserver-test/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [39885] using WatchFiles
+INFO:     Started server process [39891]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:65180 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65248 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65288 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49261 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49375 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49397 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49397 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 Not Found
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [39891]
+INFO:     Started server process [40758]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49691 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49705 - "GET /api/datasets HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [40758]
+INFO:     Started server process [40900]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49856 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49895 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49988 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50026 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50026 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50026 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50026 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50193 - "GET /api/styles/co_roads?template=roads_by_type HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50363 - "GET /api/styles/co_power_lines?template=power_by_voltage HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52049 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52071 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52246 - "GET /api/datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52246 - "GET /api/styles/co_power_lines HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52246 - "GET /api/styles/co_railways HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52246 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52375 - "GET /api/styles/co_roads?template=roads_by_type HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52375 - "GET /api/styles/co_roads HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52905 - "GET /api/styles/co_power_lines?template=power_by_voltage HTTP/1.1" 200 OK

@@ -1,0 +1,459 @@
+/* Button Components */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+.btn-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    min-width: 24px;
+}
+
+.btn-icon {
+    padding: 0.5rem;
+    width: 36px;
+    height: 36px;
+}
+
+/* Layer Control Components */
+.layer-control {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.layer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.layer-title {
+    font-weight: 600;
+    color: #ecf0f1;
+    font-size: 0.95rem;
+}
+
+.layer-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.layer-visibility {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.layer-visibility input[type="checkbox"] {
+    margin-right: 0.5rem;
+    width: 16px;
+    height: 16px;
+}
+
+.layer-visibility label {
+    font-size: 0.875rem;
+    color: #bdc3c7;
+    cursor: pointer;
+}
+
+/* Opacity Slider */
+.opacity-control {
+    margin-bottom: 0.75rem;
+}
+
+.opacity-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #bdc3c7;
+}
+
+.opacity-slider {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    appearance: none;
+}
+
+.opacity-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.opacity-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Style Controls */
+.style-control {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.style-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ecf0f1;
+    font-size: 0.875rem;
+}
+
+.style-select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.style-select option {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+/* Info Button */
+.info-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #95a5a6;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ecf0f1;
+}
+
+/* Dataset Info */
+.dataset-info {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #bdc3c7;
+    line-height: 1.4;
+}
+
+.dataset-info.hidden {
+    display: none;
+}
+
+.dataset-info h4 {
+    color: #ecf0f1;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.dataset-info dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.75rem;
+}
+
+.dataset-info dt {
+    font-weight: 500;
+    color: #95a5a6;
+}
+
+.dataset-info dd {
+    color: #bdc3c7;
+}
+
+/* Legend Styles */
+.layer-legend {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legend-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ecf0f1;
+    margin-bottom: 0.5rem;
+}
+
+.legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #bdc3c7;
+}
+
+.legend-symbol {
+    height: 3px;
+    border-radius: 1px;
+    min-width: 24px;
+    flex-shrink: 0;
+}
+
+.legend-symbol.dashed {
+    background-image: repeating-linear-gradient(
+        to right,
+        currentColor 0px,
+        currentColor 6px,
+        transparent 6px,
+        transparent 10px
+    );
+    background-size: 10px 3px;
+}
+
+.legend-symbol.power-345 {
+    background-color: #FFE135;
+    height: 4px;
+}
+
+.legend-symbol.power-230 {
+    background-color: #FFD700;
+    height: 3px;
+}
+
+.legend-symbol.power-138 {
+    background-color: #FFC107;
+    height: 2px;
+}
+
+.legend-symbol.power-69 {
+    background-color: #FFB300;
+    height: 2px;
+}
+
+.legend-symbol.power-low {
+    background-color: #FFA726;
+    height: 1px;
+}
+
+.legend-symbol.railway-main {
+    background-color: #9E9E9E;
+    height: 3px;
+}
+
+.legend-symbol.railway-branch {
+    background-color: #757575;
+    height: 2px;
+}
+
+.legend-symbol.railway-service {
+    background-color: #616161;
+    height: 1px;
+}
+
+.legend-symbol.road-motorway {
+    background-color: #E74C3C;
+    height: 4px;
+}
+
+.legend-symbol.road-trunk {
+    background-color: #E67E22;
+    height: 3px;
+}
+
+.legend-symbol.road-primary {
+    background-color: #F39C12;
+    height: 3px;
+}
+
+.legend-symbol.road-secondary {
+    background-color: #F1C40F;
+    height: 2px;
+}
+
+.legend-symbol.road-tertiary {
+    background-color: #52C41A;
+    height: 2px;
+}
+
+.legend-symbol.road-residential {
+    background-color: #BDC3C7;
+    height: 1px;
+}
+
+/* Feature Properties */
+.feature-properties {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.property-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.property-label {
+    font-weight: 500;
+    color: #95a5a6;
+    font-size: 0.875rem;
+}
+
+.property-value {
+    color: #ecf0f1;
+    font-size: 0.875rem;
+    word-break: break-all;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: #3498db;
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-small {
+    font-size: 0.8rem;
+}
+
+.text-muted {
+    color: #95a5a6;
+}
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }

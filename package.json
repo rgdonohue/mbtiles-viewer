@@ -1,0 +1,17 @@
+{
+  "name": "mbtiles-viewer",
+  "version": "1.0.0",
+  "description": "Multi-Format Tile Viewer with Interactive Controls for Colorado Infrastructure Data",
+  "main": "frontend/index.html",
+  "scripts": {
+    "start": "./scripts/start_services.sh",
+    "dev": "python -m http.server 3000 --directory frontend",
+    "backend": "cd backend && uvicorn main:app --reload --port 8000",
+    "tileserver": "tileserver-gl-light --config config/tileserver.json --port 8080"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": ["mbtiles", "maplibre", "tile-viewer", "gis"],
+  "author": "",
+  "license": "MIT"
+}
