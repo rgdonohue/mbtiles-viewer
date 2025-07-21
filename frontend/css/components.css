@@ -300,17 +300,17 @@
 }
 
 .legend-symbol.railway-main {
-    background-color: #9E9E9E;
+    background-color: #8B0000;
     height: 3px;
 }
 
 .legend-symbol.railway-branch {
-    background-color: #757575;
+    background-color: #A52A2A;
     height: 2px;
 }
 
 .legend-symbol.railway-service {
-    background-color: #616161;
+    background-color: #B22222;
     height: 1px;
 }
 

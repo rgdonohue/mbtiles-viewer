@@ -28,11 +28,11 @@
       "paint": {
         "line-color": [
           "case",
-          ["==", ["get", "usage"], "main"], "#9E9E9E",
-          ["==", ["get", "usage"], "branch"], "#757575",
-          ["==", ["get", "service"], "siding"], "#616161",
-          ["==", ["get", "service"], "yard"], "#424242",
-          "#6E6E6E"
+          ["==", ["get", "usage"], "main"], "#8B0000",
+          ["==", ["get", "usage"], "branch"], "#A52A2A",
+          ["==", ["get", "service"], "siding"], "#B22222",
+          ["==", ["get", "service"], "yard"], "#DC143C",
+          "#800000"
         ],
         "line-dasharray": [6, 3],
         "line-width": [

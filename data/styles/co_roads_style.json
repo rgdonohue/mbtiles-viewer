@@ -1,8 +1,8 @@
 {
   "version": 8,
-  "name": "Colorado Roads",
+  "name": "Colorado Roads - Systematic Multi-Zoom",
   "metadata": {
-    "description": "Road network in Colorado with highway classification"
+    "description": "Systematic phased approach to eliminate road segmentation"
   },
   "sources": {
     "tilecraft": {
@@ -19,101 +19,261 @@
       }
     },
     {
-      "id": "roads-casing",
+      "id": "co_roads-roads-casing",
       "source": "tilecraft",
       "source-layer": "roads",
-      "minzoom": 6,
+      "minzoom": 2,
       "maxzoom": 18,
       "type": "line",
       "paint": {
         "line-color": "#34495E",
         "line-width": [
           "interpolate",
-          ["linear"],
+          ["exponential", 1.8],
           ["zoom"],
+          2, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 1.2,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 1.0,
+            0
+          ],
+          4, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 2.0,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 1.6,
+            0
+          ],
           6, [
             "case",
-            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 5,
-            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 4,
-            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 3,
-            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 2,
-            1
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 3.2,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 2.6,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 1.8,
+            ["has", "ref"], 1.4,
+            0
           ],
-          12, [
+          8, [
             "case",
-            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 12,
-            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 9,
-            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 7,
-            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 5,
-            2
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 5.2,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 4.2,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 3.0,
+            ["has", "ref"], 2.2,
+            0
+          ],
+          9, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 6.5,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 5.2,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 3.8,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 2.2,
+            ["has", "ref"], 2.8,
+            0
+          ],
+          11, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 9.5,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 7.6,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 5.5,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 3.5,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 2.2,
+            ["has", "ref"], 4.0,
+            0
+          ],
+          13, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 13.5,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 10.8,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 7.8,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 5.0,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 3.2,
+            ["in", ["get", "highway"], ["literal", ["tertiary", "tertiary_link"]]], 2.0,
+            ["==", ["get", "highway"], "residential"], 1.5,
+            ["has", "ref"], 5.8,
+            0.8
           ],
           16, [
             "case",
-            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 18,
-            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 15,
-            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 12,
-            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 9,
-            4
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 20.0,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 16.0,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 11.5,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 7.5,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 4.8,
+            ["in", ["get", "highway"], ["literal", ["tertiary", "tertiary_link"]]], 3.0,
+            ["==", ["get", "highway"], "residential"], 2.2,
+            ["has", "ref"], 8.5,
+            1.2
           ]
         ],
-        "line-opacity": 0.6
+        "line-opacity": 0.7
       }
     },
     {
-      "id": "roads",
+      "id": "co_roads-roads-blur",
       "source": "tilecraft",
       "source-layer": "roads",
-      "minzoom": 6,
-      "maxzoom": 18,
+      "minzoom": 2,
+      "maxzoom": 12,
       "type": "line",
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "filter": [
+        "in", ["get", "highway"], ["literal", ["motorway", "motorway_link", "trunk", "trunk_link"]]
+      ],
       "paint": {
         "line-color": [
           "case",
-          ["==", ["get", "highway"], "motorway"], "#F8F9FA",
-          ["==", ["get", "highway"], "motorway_link"], "#F8F9FA",
-          ["==", ["get", "highway"], "trunk"], "#E9ECEF",
-          ["==", ["get", "highway"], "trunk_link"], "#E9ECEF", 
-          ["==", ["get", "highway"], "primary"], "#DEE2E6",
-          ["==", ["get", "highway"], "primary_link"], "#DEE2E6",
-          ["==", ["get", "highway"], "secondary"], "#CED4DA",
-          ["==", ["get", "highway"], "secondary_link"], "#CED4DA",
-          ["==", ["get", "highway"], "tertiary"], "#ADB5BD",
-          ["==", ["get", "highway"], "tertiary_link"], "#ADB5BD",
-          ["==", ["get", "highway"], "residential"], "#868E96",
-          ["==", ["get", "highway"], "unclassified"], "#868E96",
-          ["==", ["get", "highway"], "service"], "#6C757D",
-          "#495057"
+          ["in", ["get", "ref"], ["literal", ["I-25"]]], "#FF6B6B",
+          "#4ECDC4"
         ],
         "line-width": [
           "interpolate",
-          ["linear"],
+          ["exponential", 1.8],
           ["zoom"],
+          2, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 2.5,
+            2.0
+          ],
+          4, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 4.0,
+            3.2
+          ],
           6, [
             "case",
-            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 4,
-            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 3,
-            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 2.5,
-            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 1.5,
-            0.5
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 6.5,
+            5.0
           ],
-          12, [
+          8, [
             "case",
-            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 10,
-            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 7,
-            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 5.5,
-            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 4,
-            1.5
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 10.0,
+            8.0
+          ],
+          10, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 15.0,
+            12.0
+          ]
+        ],
+        "line-opacity": 0.3,
+        "line-blur": 2
+      }
+    },
+    {
+      "id": "co_roads-roads",
+      "source": "tilecraft",
+      "source-layer": "roads",
+      "minzoom": 2,
+      "maxzoom": 18,
+      "type": "line",
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "filter": [
+        "all",
+        ["any",
+          ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link", "trunk", "trunk_link", "primary", "primary_link", "secondary", "secondary_link", "tertiary", "tertiary_link"]]],
+          ["has", "ref"],
+          ["==", ["get", "highway"], "residential"]
+        ],
+        ["any",
+          [">", ["zoom"], 8],
+          ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]],
+          ["has", "ref"]
+        ]
+      ],
+      "paint": {
+        "line-color": [
+          "case",
+          ["in", ["get", "ref"], ["literal", ["I-25"]]], "#FF6B6B",
+          ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], "#4ECDC4",
+          ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], "#A0A0A0",
+          ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], "#BDC3C7",
+          ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], "#D5DBDB",
+          ["in", ["get", "highway"], ["literal", ["tertiary", "tertiary_link"]]], "#E8EAED",
+          ["==", ["get", "highway"], "residential"], "#F4F6F7",
+          ["has", "ref"], "#7FB3D3",
+          "#95A5A6"
+        ],
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.8],
+          ["zoom"],
+          2, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 0.8,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 0.6,
+            0
+          ],
+          4, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 1.4,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 1.0,
+            0
+          ],
+          6, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 2.4,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 1.8,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 1.2,
+            ["has", "ref"], 0.8,
+            0
+          ],
+          8, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 4.0,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 3.0,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 2.0,
+            ["has", "ref"], 1.4,
+            0
+          ],
+          9, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 5.0,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 3.8,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 2.5,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 1.4,
+            ["has", "ref"], 1.8,
+            0
+          ],
+          11, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 7.5,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 5.6,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 3.8,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 2.2,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 1.4,
+            ["has", "ref"], 2.8,
+            0
+          ],
+          13, [
+            "case",
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 11.0,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 8.2,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 5.5,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 3.5,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 2.2,
+            ["in", ["get", "highway"], ["literal", ["tertiary", "tertiary_link"]]], 1.2,
+            ["==", ["get", "highway"], "residential"], 0.8,
+            ["has", "ref"], 4.2,
+            0.4
           ],
           16, [
             "case",
-            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 15,
-            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 12,
-            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 9,
-            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 7,
-            3
+            ["in", ["get", "ref"], ["literal", ["I-25"]]], 17.0,
+            ["in", ["get", "highway"], ["literal", ["motorway", "motorway_link"]]], 12.8,
+            ["in", ["get", "highway"], ["literal", ["trunk", "trunk_link"]]], 8.5,
+            ["in", ["get", "highway"], ["literal", ["primary", "primary_link"]]], 5.5,
+            ["in", ["get", "highway"], ["literal", ["secondary", "secondary_link"]]], 3.5,
+            ["in", ["get", "highway"], ["literal", ["tertiary", "tertiary_link"]]], 2.2,
+            ["==", ["get", "highway"], "residential"], 1.5,
+            ["has", "ref"], 6.5,
+            0.8
           ]
         ],
-        "line-opacity": 0.9
+        "line-opacity": 0.95
       }
     }
   ]

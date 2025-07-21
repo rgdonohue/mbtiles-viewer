@@ -60,13 +60,6 @@ class LayerControls {
                        min="0" max="100" value="100" step="5">
             </div>
 
-            <div class="style-control">
-                <label for="style-select-${dataset.id}" class="text-small text-muted mb-1">Style Template</label>
-                <select id="style-select-${dataset.id}" class="style-select" data-action="change-style">
-                    <option value="default">Default Style</option>
-                    ${this.createStyleOptions(dataset)}
-                </select>
-            </div>
 
             <div class="layer-legend">
                 ${this.createLegend(dataset)}
@@ -94,22 +87,6 @@ class LayerControls {
         return control;
     }
 
-    createStyleOptions(dataset) {
-        if (!dataset.styling_options || !dataset.styling_options.available_templates) {
-            return '';
-        }
-
-        return dataset.styling_options.available_templates
-            .map(template => `<option value="${template}">${this.formatTemplateName(template)}</option>`)
-            .join('');
-    }
-
-    formatTemplateName(template) {
-        return template
-            .split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    }
 
     createLegend(dataset) {
         const legends = {
@@ -142,15 +119,15 @@ class LayerControls {
                 <div class="legend-title">Railway Lines</div>
                 <div class="legend-items">
                     <div class="legend-item">
-                        <div class="legend-symbol railway-main dashed" style="color: #9E9E9E;"></div>
+                        <div class="legend-symbol railway-main dashed" style="color: #8B0000;"></div>
                         <span>Main Lines</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-symbol railway-branch dashed" style="color: #757575;"></div>
+                        <div class="legend-symbol railway-branch dashed" style="color: #A52A2A;"></div>
                         <span>Branch Lines</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-symbol railway-service dashed" style="color: #616161;"></div>
+                        <div class="legend-symbol railway-service dashed" style="color: #B22222;"></div>
                         <span>Service/Yard</span>
                     </div>
                 </div>
@@ -214,9 +191,6 @@ class LayerControls {
                 case 'change-opacity':
                     this.handleOpacityChange(datasetId, e.target.value);
                     break;
-                case 'change-style':
-                    this.handleStyleChange(datasetId, e.target.value);
-                    break;
             }
         });
 
@@ -259,81 +233,6 @@ class LayerControls {
         }
     }
 
-    async handleStyleChange(datasetId, template) {
-        console.log(`Change style for ${datasetId}: ${template}`);
-        
-        try {
-            // Show loading state
-            const control = this.container.querySelector(`[data-dataset-id="${datasetId}"]`);
-            if (control) {
-                control.style.opacity = '0.7';
-            }
-
-            // Build API URL with template parameter
-            let styleUrl = `http://localhost:8000/api/styles/${datasetId}`;
-            if (template !== 'default') {
-                styleUrl += `?template=${template}`;
-            }
-
-            // Fetch new style
-            const response = await fetch(styleUrl);
-            if (!response.ok) {
-                throw new Error(`Failed to load style: ${response.status}`);
-            }
-            const style = await response.json();
-
-            // Update map layers with new style
-            this.updateLayerStyle(datasetId, style);
-
-            // Restore control opacity
-            if (control) {
-                control.style.opacity = '1';
-            }
-
-        } catch (error) {
-            console.error(`Failed to change style for ${datasetId}:`, error);
-            
-            // Reset select to previous value on error
-            const control = this.container.querySelector(`[data-dataset-id="${datasetId}"]`);
-            if (control) {
-                const select = control.querySelector('.style-select');
-                if (select) {
-                    select.value = 'default';
-                }
-                control.style.opacity = '1';
-            }
-        }
-    }
-
-    updateLayerStyle(datasetId, style) {
-        if (!window.app || !window.app.currentLayers.has(datasetId)) {
-            return;
-        }
-
-        const layerInfo = window.app.currentLayers.get(datasetId);
-        const styleLayers = style.layers.filter(layer => layer.id !== 'background');
-
-        // Update paint properties for existing layers
-        layerInfo.layerIds.forEach((layerId, index) => {
-            if (index < styleLayers.length) {
-                const styleLayer = styleLayers[index];
-                
-                // Update paint properties
-                if (styleLayer.paint) {
-                    Object.entries(styleLayer.paint).forEach(([property, value]) => {
-                        this.map.setPaintProperty(layerId, property, value);
-                    });
-                }
-
-                // Update layout properties
-                if (styleLayer.layout) {
-                    Object.entries(styleLayer.layout).forEach(([property, value]) => {
-                        this.map.setLayoutProperty(layerId, property, value);
-                    });
-                }
-            }
-        });
-    }
 
     handleInfoToggle(control) {
         const infoPanel = control.querySelector('.dataset-info');
