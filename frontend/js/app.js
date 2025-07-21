@@ -64,11 +64,11 @@ class TileViewerApp {
     }
 
     initializeMap() {
-        // Colorado bounds for initial view
-        const coloradoBounds = [-109.05, 36.99, -102.04, 41.00];
+        // Default bounds for initial view (Colorado as example)
+        const defaultBounds = [-109.05, 36.99, -102.04, 41.00];
         const center = [
-            (coloradoBounds[0] + coloradoBounds[2]) / 2,
-            (coloradoBounds[1] + coloradoBounds[3]) / 2
+            (defaultBounds[0] + defaultBounds[2]) / 2,
+            (defaultBounds[1] + defaultBounds[3]) / 2
         ];
 
         this.map = new maplibregl.Map({

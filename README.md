@@ -1,6 +1,11 @@
-# Colorado Infrastructure Tile Viewer
+# MBTiles Viewer
 
-A full-stack web application for visualizing Colorado infrastructure datasets (power lines, railways, roads) with interactive layer controls, feature inspection, and data-driven styling capabilities.
+A full-stack web application for visualizing vector tile datasets with interactive layer controls, feature inspection, and data-driven styling capabilities. Perfect for testing and exploring MBTiles files with professional cartographic styling.
+
+![MBTiles Viewer Interface](images/co-infrastructure-viewer.png)
+
+## Example Dataset
+This viewer comes pre-configured with Colorado infrastructure datasets (power lines, railways, roads) to demonstrate capabilities, but can be easily adapted for any MBTiles data.
 
 ## Features
 
@@ -97,13 +102,13 @@ tileserver-test/
 ```
 GET /api/datasets
 ```
-Returns metadata for all available datasets including bounds, zoom levels, and vector layer information.
+Automatic detection and metadata extraction from any MBTiles files in the data directory. Returns bounds, zoom levels, and vector layer information.
 
 ### Style Management  
 ```
 GET /api/styles/{dataset_id}
 ```
-Returns MapLibre style configuration for a dataset. Future support for dynamic styling with template and field parameters.
+Serves MapLibre style configurations. Automatically rewrites tile URLs for seamless integration with tileserver-gl-light.
 
 ### Health Check
 ```
@@ -148,12 +153,21 @@ tail -f logs/frontend.log
 
 ### Data File Locations
 
-The application expects MBTiles files in `data/mbtiles/`:
-- `co_power_lines.mbtiles` - Colorado power transmission lines
-- `co_railways.mbtiles` - Colorado railway infrastructure  
-- `co_roads.mbtiles` - Colorado road networks
+### Adding Your Own Data
 
-Style files in `data/styles/` should match the MBTiles names with `_style.json` suffix.
+To visualize your own MBTiles:
+
+1. **Add MBTiles files** to `data/mbtiles/`
+2. **Create style files** in `data/styles/` with matching names (`{filename}_style.json`)
+3. **Update configuration** in `config/tileserver.json` if needed
+
+### Example Data (Included)
+The viewer includes Colorado infrastructure datasets as examples:
+- `co_power_lines.mbtiles` - Power transmission lines
+- `co_railways.mbtiles` - Railway infrastructure  
+- `co_roads.mbtiles` - Road networks
+
+Each dataset demonstrates different styling approaches: categorical coloring, data-driven sizing, and multi-zoom optimization.
 
 ## Troubleshooting
 
@@ -179,8 +193,9 @@ python3 --version  # Should be 3.8+
 ### Data File Issues
 Ensure your MBTiles files are:
 - Located in `data/mbtiles/`
-- Named exactly as configured (co_power_lines.mbtiles, etc.)
 - Valid MBTiles format with vector tile data
+- Accompanied by corresponding style files in `data/styles/`
+- Named consistently (spaces and special characters may cause issues)
 
 ## Next Steps (Planned Phases)
 
@@ -208,11 +223,19 @@ Ensure your MBTiles files are:
 - Comprehensive error handling
 - Production deployment configuration
 
+## Use Cases
+
+- **Development & Testing**: Rapidly prototype and test MBTiles datasets
+- **Data Exploration**: Interactive exploration of vector tile data with feature inspection
+- **Style Development**: Test and refine MapLibre GL styles with real-time preview
+- **Performance Testing**: Evaluate tile serving performance and zoom-level behavior
+- **Presentation**: Professional visualization for stakeholder demos and data sharing
+
 ## Architecture Notes
 
-The application uses a hybrid backend strategy:
-- **tileserver-gl-light**: Optimized C++ tile serving for performance
-- **FastAPI**: Python API for coordination, metadata, and future feature queries
+The application uses a hybrid backend strategy optimized for tile serving performance:
+- **tileserver-gl-light**: Optimized C++ tile serving for high-performance delivery
+- **FastAPI**: Python API for metadata extraction and style coordination
 - **MapLibre GL JS**: Modern vector tile rendering with WebGL acceleration
 
 This architecture provides optimal tile serving performance while maintaining flexibility for metadata operations and future enhancements like feature inspection and dynamic styling.

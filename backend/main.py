@@ -36,7 +36,7 @@ STYLES_PATH = "../data/styles"
 
 DATASET_CONFIG = {
     "co_power_lines": {
-        "name": "Colorado Power Lines",
+        "name": "Power Lines",
         "styling_options": {
             "categorical_fields": ["voltage", "line_type"],
             "numeric_fields": ["voltage"],
@@ -44,7 +44,7 @@ DATASET_CONFIG = {
         }
     },
     "co_railways": {
-        "name": "Colorado Railways", 
+        "name": "Railways", 
         "styling_options": {
             "categorical_fields": ["usage", "type"],
             "numeric_fields": [],
@@ -52,7 +52,7 @@ DATASET_CONFIG = {
         }
     },
     "co_roads": {
-        "name": "Colorado Roads",
+        "name": "Roads",
         "styling_options": {
             "categorical_fields": ["highway", "surface"],
             "numeric_fields": ["lanes"],
@@ -72,7 +72,7 @@ def extract_mbtiles_metadata(mbtiles_path: str) -> Dict[str, Any]:
         metadata = dict(cursor.fetchall())
         
         # Get bounds
-        bounds = [-109.05, 36.99, -102.04, 41.00]  # Colorado bounds
+        bounds = [-109.05, 36.99, -102.04, 41.00]  # Default bounds (Colorado example)
         if 'bounds' in metadata:
             bounds = [float(x) for x in metadata['bounds'].split(',')]
         
@@ -164,7 +164,7 @@ async def root():
     return {
         "name": "MBTiles Viewer API",
         "version": "1.0.0",
-        "description": "Backend API for Colorado Infrastructure Tile Viewer",
+        "description": "Backend API for MBTiles Viewer",
         "endpoints": {
             "datasets": "/api/datasets",
             "styles": "/api/styles/{dataset_id}",

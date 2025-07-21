@@ -1,7 +1,7 @@
 {
   "name": "mbtiles-viewer",
   "version": "1.0.0",
-  "description": "Multi-Format Tile Viewer with Interactive Controls for Colorado Infrastructure Data",
+  "description": "Interactive MBTiles viewer with layer controls and feature inspection (includes Colorado infrastructure example data)",
   "main": "frontend/index.html",
   "scripts": {
     "start": "./scripts/start_services.sh",

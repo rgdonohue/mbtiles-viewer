@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a tile viewer project for Colorado infrastructure datasets (power lines, railways, roads) using MBTiles format. The project is planned as a full-stack web application with interactive layer controls, feature inspection, and data-driven styling capabilities.
+This is a general-purpose MBTiles viewer application for visualizing vector tile datasets with interactive layer controls, feature inspection, and data-driven styling capabilities. The project includes Colorado infrastructure datasets (power lines, railways, roads) as example data to demonstrate the viewer's capabilities.
 
 ## Current State
 

@@ -118,7 +118,7 @@ class TileSource {
 
         return {
             version: 8,
-            name: 'Colorado Infrastructure',
+            name: 'MBTiles Viewer',
             sources,
             layers
         };
