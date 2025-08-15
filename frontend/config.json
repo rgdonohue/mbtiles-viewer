@@ -1,0 +1,4 @@
+{
+  "tileServerBase": "http://localhost:9090",
+  "apiBase": "http://localhost:9000/api"
+}

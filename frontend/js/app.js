@@ -19,6 +19,9 @@ class TileViewerApp {
             // Initialize components
             this.initializeEventListeners();
             
+            // Load runtime config
+            await this.loadConfig();
+            
             // Load datasets from API
             await this.loadDatasets();
             
@@ -48,9 +51,29 @@ class TileViewerApp {
         }
     }
 
+    async loadConfig() {
+        try {
+            const res = await fetch('/config.json');
+            if (res.ok) {
+                const cfg = await res.json();
+                window.__CONFIG__ = cfg;
+                this.config = cfg;
+            } else {
+                // Fallback defaults
+                this.config = { apiBase: 'http://localhost:8000/api' };
+                window.__CONFIG__ = this.config;
+            }
+        } catch (e) {
+            console.warn('Failed to load config.json, using defaults', e);
+            this.config = { apiBase: 'http://localhost:8000/api' };
+            window.__CONFIG__ = this.config;
+        }
+    }
+
     async loadDatasets() {
         try {
-            const response = await fetch('http://localhost:8000/api/datasets');
+            const base = (this.config && this.config.apiBase) || 'http://localhost:8000/api';
+            const response = await fetch(`${base}/datasets`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -113,7 +136,8 @@ class TileViewerApp {
     }
 
     async onMapLoad() {
-        // Map is ready, load layers will be handled by layer controls
+        // Map is ready, adjust view to dataset bounds
+        this.fitMapToDatasets();
     }
 
     async loadInitialLayers() {
@@ -123,10 +147,35 @@ class TileViewerApp {
         }
     }
 
+    fitMapToDatasets() {
+        if (!this.map || !Array.isArray(this.datasets) || this.datasets.length === 0) return;
+
+        // Compute union of all dataset bounds [minX, minY, maxX, maxY]
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        for (const ds of this.datasets) {
+            const b = ds && ds.bounds;
+            if (Array.isArray(b) && b.length === 4) {
+                minX = Math.min(minX, b[0]);
+                minY = Math.min(minY, b[1]);
+                maxX = Math.max(maxX, b[2]);
+                maxY = Math.max(maxY, b[3]);
+            }
+        }
+
+        if (isFinite(minX) && isFinite(minY) && isFinite(maxX) && isFinite(maxY)) {
+            try {
+                this.map.fitBounds([[minX, minY], [maxX, maxY]], { padding: 40 });
+            } catch (e) {
+                console.warn('fitBounds failed:', e);
+            }
+        }
+    }
+
     async loadDatasetLayer(dataset) {
         try {
             // Get style from API
-            const styleResponse = await fetch(`http://localhost:8000/api/styles/${dataset.id}`);
+            const base = (this.config && this.config.apiBase) || 'http://localhost:8000/api';
+            const styleResponse = await fetch(`${base}/styles/${dataset.id}`);
             if (!styleResponse.ok) {
                 throw new Error(`Failed to load style for ${dataset.id}`);
             }

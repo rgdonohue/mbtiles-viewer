@@ -6,8 +6,15 @@ import json
 import os
 from typing import Dict, List, Any
 from pydantic import BaseModel
+import logging
+import re
+from pathlib import Path
 
 app = FastAPI(title="MBTiles Viewer API", version="1.0.0")
+
+# Basic logging configuration
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+logger = logging.getLogger("mbtiles_viewer.backend")
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,8 +38,10 @@ class Dataset(BaseModel):
 class DatasetsResponse(BaseModel):
     datasets: List[Dataset]
 
-MBTILES_PATH = "../data/mbtiles"
-STYLES_PATH = "../data/styles"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+MBTILES_PATH = str((PROJECT_ROOT / "data" / "mbtiles").resolve())
+STYLES_PATH = str((PROJECT_ROOT / "data" / "styles").resolve())
+TILESERVER_BASE_URL = os.getenv("TILESERVER_BASE_URL", "http://localhost:8080").rstrip("/")
 
 DATASET_CONFIG = {
     "co_power_lines": {
@@ -64,33 +73,40 @@ DATASET_CONFIG = {
 def extract_mbtiles_metadata(mbtiles_path: str) -> Dict[str, Any]:
     """Extract metadata from MBTiles file"""
     try:
-        conn = sqlite3.connect(mbtiles_path)
-        cursor = conn.cursor()
+        with sqlite3.connect(mbtiles_path) as conn:
+            cursor = conn.cursor()
         
-        # Get metadata
-        cursor.execute("SELECT name, value FROM metadata")
-        metadata = dict(cursor.fetchall())
+            # Get metadata
+            cursor.execute("SELECT name, value FROM metadata")
+            metadata = dict(cursor.fetchall())
         
-        # Get bounds
-        bounds = [-109.05, 36.99, -102.04, 41.00]  # Default bounds (Colorado example)
-        if 'bounds' in metadata:
-            bounds = [float(x) for x in metadata['bounds'].split(',')]
+            # Get bounds
+            bounds = [-109.05, 36.99, -102.04, 41.00]  # Default bounds (Colorado example)
+            if 'bounds' in metadata:
+                try:
+                    bounds = [float(x) for x in metadata['bounds'].split(',')]
+                except Exception:
+                    logger.warning("Invalid bounds format in metadata for %s", mbtiles_path)
         
-        # Get zoom levels
-        minzoom = int(metadata.get('minzoom', 0))
-        maxzoom = int(metadata.get('maxzoom', 14))
-        
-        # Get vector layers info
-        vector_layers = []
-        if 'json' in metadata:
+            # Get zoom levels
             try:
-                vector_info = json.loads(metadata['json'])
-                if 'vector_layers' in vector_info:
-                    vector_layers = vector_info['vector_layers']
-            except json.JSONDecodeError:
-                pass
+                minzoom = int(metadata.get('minzoom', 0))
+            except Exception:
+                minzoom = 0
+            try:
+                maxzoom = int(metadata.get('maxzoom', 14))
+            except Exception:
+                maxzoom = 14
         
-        conn.close()
+            # Get vector layers info
+            vector_layers = []
+            if 'json' in metadata:
+                try:
+                    vector_info = json.loads(metadata['json'])
+                    if 'vector_layers' in vector_info:
+                        vector_layers = vector_info['vector_layers']
+                except json.JSONDecodeError:
+                    logger.warning("Invalid JSON metadata in %s", mbtiles_path)
         
         return {
             'bounds': bounds,
@@ -100,7 +116,7 @@ def extract_mbtiles_metadata(mbtiles_path: str) -> Dict[str, Any]:
             'metadata': metadata
         }
     except Exception as e:
-        print(f"Error reading {mbtiles_path}: {e}")
+        logger.exception("Error reading %s", mbtiles_path)
         return {
             'bounds': [-109.05, 36.99, -102.04, 41.00],
             'minzoom': 0,
@@ -135,9 +151,16 @@ async def get_datasets():
     
     return DatasetsResponse(datasets=datasets)
 
+SAFE_ID = re.compile(r"^[a-z0-9_]+$")
+
+
 @app.get("/api/styles/{dataset_id}")
 async def get_style(dataset_id: str, template: str = None, field: str = None):
     """Get style for a dataset, optionally with data-driven styling"""
+    # Validate dataset_id
+    if not SAFE_ID.match(dataset_id):
+        raise HTTPException(status_code=400, detail="Invalid dataset id")
+
     style_file = f"{STYLES_PATH}/{dataset_id}_style.json"
     
     if not os.path.exists(style_file):
@@ -147,13 +170,19 @@ async def get_style(dataset_id: str, template: str = None, field: str = None):
         style = json.load(f)
     
     # Update tile source URL to point to tileserver
+    # Also apply min/max zoom from MBTiles metadata when available
+    mbtiles_file = f"{MBTILES_PATH}/{dataset_id}.mbtiles"
+    metadata = extract_mbtiles_metadata(mbtiles_file) if os.path.exists(mbtiles_file) else None
+    minzoom = metadata["minzoom"] if metadata else 0
+    maxzoom = metadata["maxzoom"] if metadata else 14
+
     for source_id, source in style.get("sources", {}).items():
         if source.get("type") == "vector":
             style["sources"][source_id] = {
                 "type": "vector",
-                "tiles": [f"http://localhost:8080/data/{dataset_id}/{{z}}/{{x}}/{{y}}.pbf"],
-                "minzoom": 0,
-                "maxzoom": 14
+                "tiles": [f"{TILESERVER_BASE_URL}/data/{dataset_id}/{{z}}/{{x}}/{{y}}.pbf"],
+                "minzoom": minzoom,
+                "maxzoom": maxzoom
             }
     
     return style

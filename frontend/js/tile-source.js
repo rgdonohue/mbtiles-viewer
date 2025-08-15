@@ -2,8 +2,9 @@
 class TileSource {
     constructor() {
         this.sources = new Map();
-        this.baseUrl = 'http://localhost:8080';
-        this.apiUrl = 'http://localhost:8000/api';
+        const cfg = (typeof window !== 'undefined' && window.__CONFIG__) || {};
+        this.baseUrl = cfg.tileServerBase || 'http://localhost:8080';
+        this.apiUrl = cfg.apiBase || 'http://localhost:8000/api';
     }
 
     // Get tile URL for a dataset
